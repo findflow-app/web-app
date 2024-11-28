@@ -8,11 +8,20 @@ import ThemeSwitcher from "./ThemeSwitcher";
 import { useRouter } from "next/navigation";
 import AdminImage from "./AdminImage";
 import AdminNavbarLink from "./NavLink";
+import { useUser } from "../UserProvider";
+import { useQueryClient } from "@tanstack/react-query";
+import { logout } from "../api/auth";
 
 const AdminNavbar = () => {
   const showLogo = useMediaQuery("(min-width: 768px)");
   const router = useRouter();
   const { colorScheme } = useMantineColorScheme();
+  const { user, setUser } = useUser();
+  const queryClient = useQueryClient();
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <AppShell.Navbar
@@ -43,8 +52,17 @@ const AdminNavbar = () => {
 
       <AppShell.Section>
         <Group>
-          <Text sx={{ flexGrow: 1 }}>username</Text>
-          <ActionIcon color="gray" variant="light" onClick={() => router.push("/profile")} p={4}>
+          <Text sx={{ flexGrow: 1 }}>{user?.name}</Text>
+          <ActionIcon
+            color="gray"
+            variant="light"
+            onClick={() => {
+              logout(queryClient);
+              setUser(null);
+              router.push("/login");
+            }}
+            p={4}
+          >
             <ExternalLink />
           </ActionIcon>
         </Group>

@@ -6,6 +6,10 @@ import Image from "next/image";
 import { useState } from "react";
 import PasswordRequirement from "./PasswordRequirement";
 import Link from "next/link";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { TokenManager } from "../api/tokenmanager";
+import { signup } from "../api/auth";
+import { useRedirectIfAuthenticated } from "../UserProvider";
 
 const requirements = [
   { re: /[0-9]/, label: "Includes number" },
@@ -28,6 +32,20 @@ function getStrength(password: string) {
 
 const SignupPage = () => {
   const [popoverOpened, setPopoverOpened] = useState(false);
+  useRedirectIfAuthenticated();
+  const queryClient = useQueryClient();
+
+  const signupMutation = useMutation({
+    mutationFn: signup,
+    onSuccess: (data) => {
+      console.log(data);
+      TokenManager.setToken(data);
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+    },
+    onError: (error) => {
+      signupForm.setErrors({ email: "Incorrect email or password" });
+    },
+  });
 
   const signupForm = useForm({
     initialValues: {
@@ -55,7 +73,7 @@ const SignupPage = () => {
     <Stack mt={32} align="center">
       <Image src="/logo.svg" alt="Logo" width={300} height={50} style={{ maxWidth: "calc(100vw - 2rem)", marginBottom: 16 }} />
 
-      <Form form={signupForm} onSubmit={(values) => console.log(values)}>
+      <Form form={signupForm} onSubmit={(values) => signupMutation.mutate(values)}>
         <Flex direction={"column"} w={500} maw="calc(100vw - 2rem)">
           <Paper withBorder p={16} radius="md">
             <Title mb={16} sx={{ textAlign: "center" }}>
@@ -95,7 +113,9 @@ const SignupPage = () => {
                 placeholder="Confirm your password"
                 {...signupForm.getInputProps("confirmPassword")}
               />
-              <Button type="submit">Sign up</Button>
+              <Button type="submit" loading={signupMutation.isPending}>
+                Sign up
+              </Button>
             </Stack>
           </Paper>
         </Flex>

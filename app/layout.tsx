@@ -5,6 +5,7 @@ import "@mantine/core/styles.css";
 import { RootStyleRegistry } from "./EmotionRootStyleRegistry";
 import { emotionTransform, MantineEmotionProvider } from "@mantine/emotion";
 import QueryProvider from "./QueryProvider";
+import UserProvider from "./UserProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -29,7 +30,9 @@ export default function RootLayout({
         <QueryProvider>
           <RootStyleRegistry>
             <MantineEmotionProvider>
-              <MantineProvider stylesTransform={emotionTransform}>{children}</MantineProvider>
+              <UserProvider>
+                <MantineProvider stylesTransform={emotionTransform}>{children}</MantineProvider>
+              </UserProvider>
             </MantineEmotionProvider>
           </RootStyleRegistry>
         </QueryProvider>
