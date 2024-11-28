@@ -2,12 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 
-import '@mantine/core/styles.css';
+import "@mantine/core/styles.css";
 import { RootStyleRegistry } from "./EmotionRootStyleRegistry";
-import {
-  emotionTransform,
-  MantineEmotionProvider,
-} from '@mantine/emotion';
+import { emotionTransform, MantineEmotionProvider } from "@mantine/emotion";
+import QueryProvider from "./QueryProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,20 +19,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-
       <head>
         <ColorSchemeScript />
       </head>
 
-        <body>
-        <RootStyleRegistry>
-          <MantineEmotionProvider>
-            <MantineProvider stylesTransform={emotionTransform}> 
-              {children}
-            </MantineProvider>
-          </MantineEmotionProvider>
-        </RootStyleRegistry>
-        </body>
+      <body>
+        <QueryProvider>
+          <RootStyleRegistry>
+            <MantineEmotionProvider>
+              <MantineProvider stylesTransform={emotionTransform}>{children}</MantineProvider>
+            </MantineEmotionProvider>
+          </RootStyleRegistry>
+        </QueryProvider>
+      </body>
     </html>
   );
 }
