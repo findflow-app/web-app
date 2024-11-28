@@ -4,10 +4,10 @@ import { Check, X } from "lucide-react";
 
 function PasswordRequirement({ meets, label }: { meets: boolean; label: string }) {
   return (
-    <Text c={meets ? "teal" : "red"} style={{ display: "flex", alignItems: "center" }} mt={7} size="sm">
+    <Box c={meets ? "teal" : "red"} style={{ display: "flex", alignItems: "center" }} mt={7} size="sm">
       {meets ? <Check style={{ width: rem(14), height: rem(14) }} /> : <X style={{ width: rem(14), height: rem(14) }} />}{" "}
       <Box ml={10}>{label}</Box>
-    </Text>
+    </Box>
   );
 }
 
@@ -29,6 +29,8 @@ function getStrength(password: string) {
 
   return Math.max(100 - (100 / (requirements.length + 1)) * multiplier, 10);
 }
+
+export default PasswordRequirement;
 
 function Demo() {
   const [popoverOpened, setPopoverOpened] = useState(false);
