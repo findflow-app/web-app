@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { PasswordInput, Progress, Text, Popover, Box, rem } from "@mantine/core";
+import { Box, rem } from "@mantine/core";
 import { Check, X } from "lucide-react";
 
 function PasswordRequirement({ meets, label }: { meets: boolean; label: string }) {
