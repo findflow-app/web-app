@@ -45,10 +45,17 @@ const SignupPage = () => {
           <Title mb={32} sx={{ textAlign: "center" }}>
             Sign up
           </Title>
-
+          <Text>
+            Fields with{" "}
+            <Text span c="red.7">
+              *
+            </Text>{" "}
+            are required
+          </Text>
           <Stack>
+            <TextInput label="Full name" withAsterisk placeholder="Your full name" />
             <TextInput label="Email" withAsterisk placeholder="Your email" />
-            <TextInput label="Username" withAsterisk placeholder="Your username" />
+            <TextInput label="Phone number" placeholder="Your phone number" />
 
             <Popover opened={popoverOpened} position="bottom" width="target" transitionProps={{ transition: "pop" }}>
               <Popover.Target>
