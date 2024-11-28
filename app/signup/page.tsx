@@ -38,9 +38,9 @@ const SignupPage = () => {
 
   return (
     <Stack mt={32} align="center">
-      <Image src="/logo.svg" alt="Logo" width={300} height={100} />
+      <Image src="/logo.svg" alt="Logo" width={300} height={100} style={{ maxWidth: "calc(100vw - 2rem)" }} />
 
-      <Flex direction={"column"} w={500}>
+      <Flex direction={"column"} w={500} maw="calc(100vw - 2rem)">
         <Paper withBorder p={16} radius="md">
           <Title mb={32} sx={{ textAlign: "center" }}>
             Sign up
