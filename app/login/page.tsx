@@ -4,9 +4,11 @@ import React from 'react'
 const LoginPage = () => {
   return (
     <Center mt={32}>
-      <Flex direction={"column"} w={500}>
+      <Flex direction={"column"} w={500} >
         <Paper withBorder p={16}>
-          <Title>Login</Title>
+          <Title sx={{
+            color: "blue",
+}}>Login</Title>
 
           <Stack>
             <TextInput label="Email" placeholder="Your email" />

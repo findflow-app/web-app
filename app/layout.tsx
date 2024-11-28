@@ -3,6 +3,11 @@ import "./globals.css";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 
 import '@mantine/core/styles.css';
+import { RootStyleRegistry } from "./EmotionRootStyleRegistry";
+import {
+  emotionTransform,
+  MantineEmotionProvider,
+} from '@mantine/emotion';
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,9 +27,13 @@ export default function RootLayout({
       </head>
 
         <body>
-          <MantineProvider> 
-            {children}
-          </MantineProvider>
+        <RootStyleRegistry>
+          <MantineEmotionProvider>
+            <MantineProvider stylesTransform={emotionTransform}> 
+              {children}
+            </MantineProvider>
+          </MantineEmotionProvider>
+        </RootStyleRegistry>
         </body>
     </html>
   );
