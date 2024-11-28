@@ -1,16 +1,15 @@
 import { Button, Center, Fieldset, Flex, Paper, Stack, TextInput, Title } from "@mantine/core";
+import Image from "next/image";
 import React from "react";
 
 const LoginPage = () => {
   return (
-    <Center mt={32}>
+    <Stack mt={32} align="center">
+      <Image src="/logo.svg" alt="Logo" width={300} height={100} />
+
       <Flex direction={"column"} w={500}>
         <Paper withBorder p={16}>
-          <Title
-            sx={{
-              color: "blue",
-            }}
-          >
+          <Title mb={32} sx={{ textAlign: "center" }}>
             Login
           </Title>
 
@@ -21,7 +20,7 @@ const LoginPage = () => {
           </Stack>
         </Paper>
       </Flex>
-    </Center>
+    </Stack>
   );
 };
 
