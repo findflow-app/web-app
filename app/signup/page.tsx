@@ -56,7 +56,6 @@ const SignupPage = () => {
                   <PasswordInput
                     label="Password"
                     withAsterisk
-                    description="Password must contain at least 8 characters (one number and one special character)."
                     placeholder="Your new password"
                     value={value}
                     onChange={(event) => setValue(event.currentTarget.value)}
