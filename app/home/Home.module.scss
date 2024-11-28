@@ -1,0 +1,86 @@
+.home {
+  $gridWidth: 2px;
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(#3498db, .05) $gridWidth, transparent 1px),
+    linear-gradient(to bottom, rgba(#3498db, .05) $gridWidth, transparent 1px);
+
+  animation: moveUp 3s linear infinite;
+  overflow: hidden;
+}
+
+@keyframes moveUp {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 -40px;
+  }
+}
+
+.dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #3498db;
+
+  border-radius: 50%;
+
+  left: calc(var(--x) * 99%);
+  top: calc(var(--y) * 99%);
+
+  animation: fade 3s linear forwards;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #3498db;
+    border-radius: 50%;
+    animation: boom 1s linear forwards;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+@keyframes boom {
+  0% {
+    width: 5px;
+    height: 5px;
+    opacity: 1;
+  }
+
+  100% {
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
