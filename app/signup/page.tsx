@@ -9,13 +9,13 @@ import PasswordRequirement from "./PasswordRequirement";
 
 const requirements = [
   { re: /[0-9]/, label: "Includes number" },
-  { re: /[a-z]/, label: "Includes lowercase letter" },
-  { re: /[A-Z]/, label: "Includes uppercase letter" },
   { re: /[$&+,:;=?@#|'<>.^*()%!-]/, label: "Includes special symbol" },
 ];
 
 function getStrength(password: string) {
-  let multiplier = password.length > 5 ? 0 : 1;
+  if (password.length < 8) return 0;
+
+  let multiplier = password.length > 7 ? 0 : 1;
 
   requirements.forEach((requirement) => {
     if (!requirement.re.test(password)) {
@@ -66,7 +66,7 @@ const SignupPage = () => {
 
               <Popover.Dropdown>
                 <Progress color={color} value={strength} size={5} mb="xs" />
-                <PasswordRequirement label="Includes at least 6 characters" meets={value.length > 5} />
+                <PasswordRequirement label="Includes at least 8 characters" meets={value.length > 7} />
                 {checks}
               </Popover.Dropdown>
             </Popover>
