@@ -14,3 +14,12 @@ export const getUsers = async (name: string) => {
     name: item[1],
   }));
 }
+
+export const getUserLocation = async (id: number) => {
+  const res = await api.post<{mac: string, type: string, timestamp: string}>("/get_position", {
+    user_id: id,
+    token: TokenManager.getToken(),
+  });
+
+  return res.data;
+}

@@ -48,7 +48,6 @@ const AdminNavbar = () => {
       <AppShell.Section grow>
         <AdminNavbarLink text="Dashboard" icon={<LayoutDashboard />} to="/dash" />
         <AdminNavbarLink text="Search" icon={<Search />} to="/dash/search" />
-        <AdminNavbarLink text="idk" icon={<LayoutDashboard />} to="/admin" />
       </AppShell.Section>
 
       <AppShell.Section>

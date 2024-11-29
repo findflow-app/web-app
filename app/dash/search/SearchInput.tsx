@@ -43,8 +43,9 @@ const SearchInput: FC<SearchInputProps> = ({ onUserSelect }) => {
     >
       <Combobox.Target>
         <TextInput
-          label="Pick value or type anything"
-          placeholder="Search groceries"
+          size="lg"
+          label="Enter username to search"
+          placeholder="Search user..."
           value={value}
           onChange={(event) => {
             setValue(event.currentTarget.value);
