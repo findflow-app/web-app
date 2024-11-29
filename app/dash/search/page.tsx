@@ -1,11 +1,13 @@
+import { Box } from "lucide-react";
 import React from "react";
+import SearchPage from "./SearchPage";
 
 export const metadata = {
   title: "Search",
 };
 
-const SearchPage = () => {
-  return <div>SearchPage</div>;
+const SearchPageServer = () => {
+  return <SearchPage />;
 };
 
-export default SearchPage;
+export default SearchPageServer;
