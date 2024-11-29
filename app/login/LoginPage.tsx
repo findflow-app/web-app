@@ -9,6 +9,7 @@ import React from "react";
 import { login } from "../api/auth";
 import { useRedirectIfAuthenticated, useUser } from "../UserProvider";
 import { TokenManager } from "../api/tokenmanager";
+import { notifications } from "@mantine/notifications";
 
 const LoginPage = () => {
   useRedirectIfAuthenticated();
@@ -19,6 +20,11 @@ const LoginPage = () => {
     onSuccess: (data) => {
       TokenManager.setToken(data);
       queryClient.invalidateQueries({ queryKey: ["user"] });
+
+      notifications.show({
+        title: "Welcome back!",
+        message: "You have successfully logged in",
+      });
     },
     onError: (error) => {
       loginForm.setErrors({ email: "Incorrect email or password" });

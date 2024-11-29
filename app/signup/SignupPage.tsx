@@ -10,6 +10,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { TokenManager } from "../api/tokenmanager";
 import { signup } from "../api/auth";
 import { useRedirectIfAuthenticated } from "../UserProvider";
+import { notifications } from "@mantine/notifications";
 
 const requirements = [
   { re: /[0-9]/, label: "Includes number" },
@@ -41,6 +42,11 @@ const SignupPage = () => {
       console.log(data);
       TokenManager.setToken(data);
       queryClient.invalidateQueries({ queryKey: ["user"] });
+
+      notifications.show({
+        title: "Welcome!",
+        message: "You have successfully signed up!",
+      });
     },
     onError: (error) => {
       signupForm.setErrors({ email: "Incorrect email or password" });

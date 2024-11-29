@@ -23,7 +23,7 @@ const AdminNavbarLink: FC<AdminNavbarLinkProps> = ({ text, icon, to, children })
       sx={{ borderRadius: ".2rem" }}
       leftSection={icon}
       label={text}
-      active={to == "/admin" ? pathname == "/admin" : pathname.startsWith(to)}
+      active={to == "/dash" ? pathname == "/dash" : pathname.startsWith(to)}
     >
       {children}
     </NavLink>

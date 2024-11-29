@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 
-import "@mantine/core/styles.css";
 import { RootStyleRegistry } from "./EmotionRootStyleRegistry";
 import { emotionTransform, MantineEmotionProvider } from "@mantine/emotion";
 import QueryProvider from "./QueryProvider";
 import UserProvider from "./UserProvider";
+import { Notifications } from "@mantine/notifications";
+
+import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 
 export const metadata: Metadata = {
   title: {
@@ -31,7 +34,10 @@ export default function RootLayout({
           <RootStyleRegistry>
             <MantineEmotionProvider>
               <UserProvider>
-                <MantineProvider stylesTransform={emotionTransform}>{children}</MantineProvider>
+                <MantineProvider stylesTransform={emotionTransform}>
+                  <Notifications />
+                  {children}
+                </MantineProvider>
               </UserProvider>
             </MantineEmotionProvider>
           </RootStyleRegistry>

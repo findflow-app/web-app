@@ -2,7 +2,7 @@
 
 import { ActionIcon, AppShell, Box, Group, Text, useMantineColorScheme } from "@mantine/core";
 import { useColorScheme, useMediaQuery } from "@mantine/hooks";
-import { ExternalLink, LayoutDashboard } from "lucide-react";
+import { ExternalLink, LayoutDashboard, Search } from "lucide-react";
 import React from "react";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { useRouter } from "next/navigation";
@@ -11,6 +11,7 @@ import AdminNavbarLink from "./NavLink";
 import { useUser } from "../UserProvider";
 import { useQueryClient } from "@tanstack/react-query";
 import { logout } from "../api/auth";
+import { notifications } from "@mantine/notifications";
 
 const AdminNavbar = () => {
   const showLogo = useMediaQuery("(min-width: 768px)");
@@ -46,7 +47,7 @@ const AdminNavbar = () => {
 
       <AppShell.Section grow>
         <AdminNavbarLink text="Dashboard" icon={<LayoutDashboard />} to="/dash" />
-        <AdminNavbarLink text="Dalsi" icon={<LayoutDashboard />} to="/admin" />
+        <AdminNavbarLink text="Search" icon={<Search />} to="/dash/search" />
         <AdminNavbarLink text="idk" icon={<LayoutDashboard />} to="/admin" />
       </AppShell.Section>
 
@@ -59,6 +60,12 @@ const AdminNavbar = () => {
             onClick={() => {
               logout(queryClient);
               setUser(null);
+
+              notifications.show({
+                title: "Logged out",
+                message: "You have been logged out",
+              });
+
               router.push("/login");
             }}
             p={4}
