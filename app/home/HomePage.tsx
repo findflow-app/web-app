@@ -15,15 +15,34 @@ interface DotObject {
 
 export default function Home() {
   const [dots, setDots] = useState<DotObject[]>([]);
-  const DOT_SPAWN_RATE = 900;
+  const DOT_SPAWN_RATE = 1000;
+
+  const addDot = () => {
+    const newDot = {
+      x: Math.random(),
+      y: Math.random(),
+    };
+    setDots((prev) => [...prev, newDot]);
+
+    if (dots.length > 50) {
+      setDots((prev) => prev.slice(1));
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const newDot = {
-        x: Math.random(),
-        y: Math.random(),
-      };
-      setDots((prev) => [...prev, newDot]);
+      addDot();
+
+      if (Math.random() < 0.15) {
+        // set timer to add 6 new dots at in quick succession
+        const int = setInterval(() => {
+          addDot();
+        }, 200);
+
+        setTimeout(() => {
+          clearInterval(int);
+        }, 600);
+      }
     }, DOT_SPAWN_RATE);
 
     return () => clearInterval(interval);
@@ -58,12 +77,7 @@ export default function Home() {
           }}
         />
         <Group>
-          <Button component={Link} href={"/signup"}>
-            Sign up
-          </Button>
-          <Button component={Link} href={"/login"} variant="default">
-            Log in
-          </Button>
+          <Text c="dimmed">This project is coming soon. Check back later for more updates.</Text>
         </Group>
       </Stack>
     </Box>
